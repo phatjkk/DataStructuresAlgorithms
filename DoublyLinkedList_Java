@@ -1,0 +1,476 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+
+public class Homework_07 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc;
+		DoublyLinkedList theList = new DoublyLinkedList();
+		int select;
+		double valInput, valInputK;
+		boolean insertResult;
+		do {
+			System.out.println("----------------------------------");
+			System.out.println("1. Them danh sach lien ket");
+			System.out.println("2. In danh sach lien ket");
+			System.out.println("3. Tim kiem k trong danh sach lien ket");
+			System.out.println("4. Them phan tu vao danh sach lien ket");
+			System.out.println("5. Them Node vao dau danh sach lien ket");
+			System.out.println("6. Them Node vao truoc khoa k trong danh sach lien ket");
+			System.out.println("7. Them Node vao sau khoa k trong danh sach lien ket");
+			System.out.println("8. Xoa phan tu có khoa k");
+			System.out.println("9. Xoa phan tu dau danh sach");
+			System.out.println("10. Xoa phan tu truoc phan tu co khoa k");
+			System.out.println("11. Xoa phan tu sau phan tu co khoa k");
+			System.out.println("12. Xoa phan tu cuoi danh sach");
+			System.out.println("13. Sap xep danh sach lien ket");
+			System.out.println("14. Thoat chuong trinh");
+			System.out.println("----------------------------------");
+			System.out.println("Lua chon cua ban:");
+			sc = new Scanner(System.in);
+			select = sc.nextInt();
+			switch (select) {
+			case 1:
+				// 1. Them danh sach lien ket
+				System.out.println("Gia tri phan tu can them la:");
+				valInput = sc.nextDouble();
+				theList.insertLast(valInput);
+				System.out.println("Da xong!");
+				break;
+			case 2:
+				// 2. In danh sach lien ket
+				theList.displayForward();
+				break;
+			case 3:
+				// 3. Tim kiem k trong danh sach lien ket
+				System.out.println("Nhap key phan tu can tim:");
+				valInput = sc.nextDouble();
+				System.out.println("Dang tim...");
+				int indexSearch = theList.searchByKey(valInput);
+				if (indexSearch == -1) {
+					System.out.println("Khong tim thay phan tu co key = " + valInput);
+				} else {
+					System.out.println("Da tim thay phan tu co key = " + valInput + " o vi tri: " + indexSearch);
+				}
+				break;
+			case 4:
+				// 4. Them phan tu vao danh sach lien ket
+				System.out.println("Gia tri phan tu can them la:");
+				valInput = sc.nextDouble();
+				theList.insertLast(valInput);
+				System.out.println("Da xong!");
+				break;
+			case 5:
+				// 5. Them Node vao dau danh sach lien ket
+				System.out.println("Nhap gia tri phan tu can them vao dau danh sach:");
+				valInput = sc.nextDouble();
+				theList.insertFirst(valInput);
+				System.out.println("Da xong!");
+				break;
+			case 6:
+				// 6. Them Node vao truoc khoa k trong danh sach lien ket
+				System.out.println("Nhap gia tri phan tu k:");
+				valInputK = sc.nextDouble();
+				System.out.println("Nhap gia tri phan tu can them truoc k:");
+				valInput = sc.nextDouble();
+				System.out.println("Dang tim...");
+				insertResult = theList.insertBefore(valInputK, valInput);
+				if (insertResult == true) {
+					System.out.println("Them thanh cong!");
+				} else {
+					System.out.println("Khong tim thay khoa k");
+				}
+				break;
+			case 7:
+				// 7. Them Node vao sau khoa k trong danh sach lien ket
+				System.out.println("Nhap gia tri phan tu k:");
+				valInputK = sc.nextDouble();
+				System.out.println("Nhap gia tri phan tu can them sau k:");
+				valInput = sc.nextDouble();
+				System.out.println("Dang tim...");
+				insertResult = theList.insertAfter(valInputK, valInput);
+				if (insertResult == true) {
+					System.out.println("Them thanh cong!");
+				} else {
+					System.out.println("Khong tim thay khoa k");
+				}
+				break;
+			case 8:
+				// 8. Xoa phan tu có khoa k
+				System.out.println("Nhap gia tri phan tu k:");
+				valInputK = sc.nextDouble();
+				System.out.println("Dang xoa...");
+				theList.deleteKey(valInputK);
+				System.out.println("Da xong!");
+				break;
+			case 9:
+				// 9. Xoa phan tu dau danh sach
+				theList.deleteFirst();
+				System.out.println("Da xoa xong phan tu dau danh sach!");
+				break;
+			case 10:
+				// 10. Xoa phan tu truoc phan tu co khoa k
+				System.out.println("Nhap gia tri phan tu k:");
+				valInputK = sc.nextDouble();
+				System.out.println("Dang tim...");
+				insertResult = theList.deleteBefore(valInputK);
+				if (insertResult == true) {
+					System.out.println("Xoa thanh cong!");
+				} else {
+					System.out.println("Khong tim thay phan tu truoc khoa k");
+				}
+				break;
+			case 11:
+				// 11. Xoa phan tu sau phan tu co khoa k
+				System.out.println("Nhap gia tri phan tu k:");
+				valInputK = sc.nextDouble();
+				System.out.println("Dang tim...");
+				insertResult = theList.deleteAfter(valInputK);
+				if (insertResult == true) {
+					System.out.println("Xoa thanh cong!");
+				} else {
+					System.out.println("Khong tim thay phan tu sau khoa k");
+				}
+				break;
+			case 12:
+				// 12. Xoa phan tu cuoi danh sach
+				theList.deleteLast();
+				System.out.println("Da xoa xong phan tu cuoi danh sach!");
+				break;
+			case 13:
+				// 13. Sap xep danh sach lien ket
+				theList.quickSort();
+				System.out.println("Da sap xep xong!");
+				break;
+			case 14:
+				System.out.println("Tam biet!");
+				break;
+			}
+		} while (select != 14);
+		sc.close();
+
+	}
+}
+
+////////////////////////////////////////////////////////////////
+class LinkDb {
+	public double dData; // data item
+	public LinkDb next; // next link in list
+	public LinkDb previous; // previous link in list
+//------------------------------------------------------------
+
+	public LinkDb(double d) // constructor
+	{
+		dData = d;
+	}
+
+//------------------------------------------------------------
+	public void displayLink() // display this link
+	{
+		System.out.print(dData + " ");
+	}
+//------------------------------------------------------------
+} // end class Link
+////////////////////////////////////////////////////////////////
+
+class DoublyLinkedList {
+	private LinkDb first; // ref to first item
+	private LinkDb last; // ref to last item
+//------------------------------------------------------------
+
+	public DoublyLinkedList() // constructor
+	{
+		first = null; // no items on list yet
+		last = null;
+	}
+
+//------------------------------------------------------------
+	public boolean isEmpty() // true if no links
+	{
+		return first == null;
+	}
+
+//------------------------------------------------------------
+	public void insertFirst(double dd) // insert at front of list
+	{
+		LinkDb newLink = new LinkDb(dd); // make new link
+		if (isEmpty()) // if empty list,
+			last = newLink; // newLink <-- last
+		else
+			first.previous = newLink; // newLink <-- old first
+		newLink.next = first; // newLink --> old first
+		first = newLink; // first --> newLink
+	}
+
+//------------------------------------------------------------
+	public void insertLast(double dd) // insert at end of list
+	{
+		LinkDb newLink = new LinkDb(dd); // make new link
+		if (isEmpty()) // if empty list,
+			first = newLink; // first --> newLink
+		else {
+			last.next = newLink; // old last --> newLink
+			newLink.previous = last; // old last <-- newLink
+		}
+
+		last = newLink; // newLink <-- last
+	}
+
+//------------------------------------------------------------
+	public LinkDb deleteFirst() // delete first link
+	{ // (assumes non-empty list)
+		LinkDb temp = first;
+		if (first.next == null) // if only one item
+			last = null; // null <-- last
+		else
+			first.next.previous = null; // null <-- old next
+		first = first.next; // first --> old next
+		return temp;
+	}
+
+	// Function to delete a node in a Doubly Linked List.
+	// head_ref --> pointer to head node pointer.
+	// del --> data of node to be deleted.
+
+//------------------------------------------------------------
+	public LinkDb deleteLast() // delete last link
+	{ // (assumes non-empty list)
+		LinkDb temp = last;
+		if (first.next == null) // if only one item
+			first = null; // first --> null
+		else
+			last.previous.next = null; // old previous --> null
+		last = last.previous; // old previous <-- last
+		return temp;
+	}
+
+	public int searchByKey(double x) {
+
+		// Stores head Node
+		LinkDb temp = first;
+
+		// Stores position of the integer
+		// in the doubly linked list
+		int pos = 0;
+
+		// Traverse the doubly linked list
+		while (temp.dData != x && temp.next != null) {
+			// Update pos
+			pos++;
+
+			// Update temp
+			temp = temp.next;
+		}
+
+		// If the integer not present
+		// in the doubly linked list
+		if (temp.dData != x)
+			return -1;
+		// If the integer present in
+		// the doubly linked list
+		return (pos + 1);
+	}
+
+//------------------------------------------------------------
+	public boolean deleteBefore(double key) {
+		LinkDb current = first; // start at beginning
+		while (current.dData != key) // until match is found,
+		{
+			current = current.next; // move to next link
+			if (current == null)
+				return false; // didn't find it
+
+		}
+		if (current.dData == first.dData) {
+			return false;
+		}
+
+		deleteKey(current.previous.dData);
+		return true;
+	}
+
+	public boolean deleteAfter(double key) {
+		LinkDb current = first; // start at beginning
+		while (current.dData != key) // until match is found,
+		{
+			current = current.next; // move to next link
+			if (current == null)
+				return false; // didn't find it
+
+		}
+		if (current.dData == last.dData) {
+			return false;
+		}
+
+		deleteKey(current.next.dData);
+		return true;
+	}
+
+	// .------------------------
+	public boolean insertBefore(double key, double data) {
+		LinkDb current = first; // start at beginning
+		while (current.dData != key) // until match is found,
+		{
+			current = current.next; // move to next link
+			if (current == null)
+				return false; // didn't find it
+
+		}
+		/* Check if the given nx_node is NULL */
+
+		// Allocate node, put in the data
+		LinkDb new_node = new LinkDb(data);
+
+		// Making prev of new node as prev of next node
+		new_node.previous = current.previous;
+
+		// Making prev of next node as new node
+		current.previous = new_node;
+
+		// Making next of new node as next node
+		new_node.next = current;
+
+		// Check if new node is added as head
+		if (new_node.previous != null)
+			new_node.previous.next = new_node;
+		else
+			first = new_node;
+		return true;
+	}
+
+//insert dd just after key
+	public boolean insertAfter(double key, double dd) { // (assumes non-empty
+
+		LinkDb current = first; // start at beginning
+		while (current.dData != key) // until match is found,
+		{
+			current = current.next; // move to next link
+			if (current == null)
+				return false; // didn't find it
+
+		}
+		LinkDb newLink = new LinkDb(dd); // make new link
+		if (current == last) // if last link,
+		{
+			newLink.next = null; // newLink --> null
+			last = newLink; // newLink <-- last
+		} else // not last link,
+		{
+			newLink.next = current.next; // newLink --> old next
+
+//newLink <-- old next
+
+			current.next.previous = newLink;
+		}
+		newLink.previous = current; // old current <-- newLink
+		current.next = newLink; // old current --> newLink
+		return true; // found it, did insertion
+	}
+
+//------------------------------------------------------------
+	public LinkDb deleteKey(double key) // delete item w/ given key
+	{ // (assumes non-empty list)
+		LinkDb current = first; // start at beginning
+		while (current.dData != key) // until match is found,
+		{
+			current = current.next; // move to next link
+			if (current == null)
+				return null; // didn't find it
+
+		}
+
+		if (current == first) // found it; first item?
+			first = current.next; // first --> old next
+		else // not first
+//old previous --> old next
+
+			current.previous.next = current.next;
+		if (current == last) // last item?
+			last = current.previous; // old previous <-- last
+		else // not last
+//old previous <-- old next
+
+			current.next.previous = current.previous;
+		return current; // return value
+	}
+
+//------------------------------------------------------------
+	public void displayForward() {
+		System.out.print("List (first-->last): ");
+		LinkDb current = first; // start at beginning
+		while (current != null) // until end of list,
+		{
+			current.displayLink(); // display data
+			current = current.next; // move to next link
+		}
+		System.out.println("");
+	}
+
+//------------------------------------------------------------
+	public void displayBackward() {
+		System.out.print("List (last-->first): ");
+		LinkDb current = last; // start at end
+		while (current != null) // until start of list,
+		{
+			current.displayLink(); // display data
+			current = current.previous; // move to previous link
+		}
+		System.out.println("");
+	}
+
+	LinkDb lastNode(LinkDb node) {
+		while (node.next != null)
+			node = node.next;
+		return node;
+	}
+
+	/*
+	 * Considers last element as pivot, places the pivot element at its correct
+	 * position in sorted array, and places all smaller (smaller than pivot) to left
+	 * of pivot and all greater elements to right of pivot
+	 */
+	LinkDb partition(LinkDb l, LinkDb h) {
+		// set pivot as h element
+		double x = h.dData;
+		// similar to i = l-1 for array implementation
+		LinkDb i = l.previous;
+		// Similar to "for (int j = l; j <= h- 1; j++)"
+		for (LinkDb j = l; j != h; j = j.next) {
+			if (j.dData <= x) {
+				// Similar to i++ for array
+				i = (i == null) ? l : i.next;
+				double temp = i.dData;
+				i.dData = j.dData;
+				j.dData = temp;
+			}
+		}
+		i = (i == null) ? l : i.next; // Similar to i++
+		double temp = i.dData;
+		i.dData = h.dData;
+		h.dData = temp;
+		return i;
+	}
+
+	void _quickSort(LinkDb l, LinkDb h) {
+		if (h != null && l != h && l != h.next) {
+			LinkDb temp = partition(l, h);
+			_quickSort(l, temp.previous);
+			_quickSort(temp.next, h);
+		}
+	}
+
+	// The main function to sort a linked list. It mainly calls _quickSort()
+	public void quickSort() {
+		// Find last node
+		 
+		LinkDb head = lastNode(first);
+		// Call the recursive QuickSort
+		_quickSort(first, head);
+	}
+//------------------------------------------------------------
+} // end class DoublyLinkedList
+////////////////////////////////////////////////////////////////
